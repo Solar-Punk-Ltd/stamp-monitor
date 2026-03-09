@@ -120,8 +120,6 @@ cd /opt/stamp-monitor
 node index.js
 ```
 
-The only requirement on the server is **Node.js v20+**. No `npm install`, no `git clone`, no `node_modules`.
-
 ## Scheduling
 
 ### Option A: cron
