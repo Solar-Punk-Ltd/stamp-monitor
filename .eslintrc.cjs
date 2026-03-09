@@ -10,7 +10,7 @@ module.exports = {
     'plugin:import/warnings',
     'plugin:import/typescript',
   ],
-  ignorePatterns: ['dist', 'node_modules', '.eslintrc.cjs'],
+  ignorePatterns: ['dist', 'bundle', 'node_modules', '.eslintrc.cjs'],
   rules: {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',

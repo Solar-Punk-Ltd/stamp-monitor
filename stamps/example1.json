@@ -1,5 +1,7 @@
 {
   "project": "Solarpunk PROD MSRS",
+  "subject": "Stamp Status Update - Solarpunk PROD MSRS",
+  "maintainerAddress": "maintainer@example.com",
   "stamps": [
     {
       "name": "Private 1",

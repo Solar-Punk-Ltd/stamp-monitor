@@ -11,6 +11,8 @@ export type Stamp = {
 
 export type StampFile = {
   project: string;
+  subject: string;
+  maintainerAddress: string;
   stamps: Stamp[];
 };
 

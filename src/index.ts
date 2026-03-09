@@ -3,6 +3,7 @@ import * as path from 'path';
 
 import { checkStamp, ProjectReport, StampFile, StampStatus } from './batch';
 import { getCurrentTotalOutPayment, getLastPrice } from './contract';
+import { sendReport } from './email';
 import { delay, logReport } from './utils';
 
 // Delay between RPC calls to avoid rate limiting on public endpoints
@@ -72,11 +73,10 @@ async function main() {
   const stampFiles = loadStampFiles(stampsDir);
   const { currentTotalOutPayment, lastPrice } = await fetchContractState();
 
-  const reports: ProjectReport[] = [];
   for (const stampFile of stampFiles) {
     const report = await processProject(stampFile, currentTotalOutPayment, lastPrice);
-    reports.push(report);
     logReport(report);
+    await sendReport(report, stampFile.maintainerAddress, stampFile.subject);
   }
 }
 

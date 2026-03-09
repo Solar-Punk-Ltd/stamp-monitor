@@ -1,5 +1,7 @@
 {
   "project": "Cryptomondays PROD MSRS",
+  "subject": "Stamp Status Update - Cryptomondays PROD MSRS",
+  "maintainerAddress": "maintainer@example.com",
   "stamps": [
     {
       "name": "Private 1",
