@@ -1,0 +1,15 @@
+{
+  "project": "Cryptomondays PROD MSRS",
+  "stamps": [
+    {
+      "name": "Private 1",
+      "description": "Example 1",
+      "batchId": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"
+    },
+    {
+      "name": "Private 2",
+      "description": "Example 2",
+      "batchId": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"
+    }
+  ]
+}
