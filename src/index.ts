@@ -5,6 +5,7 @@ import { checkStamp, ProjectReport, StampFile, StampStatus } from './batch';
 import { getCurrentTotalOutPayment, getLastPrice } from './contract';
 import { sendReport } from './email';
 import { delay, logReport } from './utils';
+import { logValidationErrors, validateStampFile } from './validate';
 
 // Delay between RPC calls to avoid rate limiting on public endpoints
 const requestDelayMs = Number(process.env.REQUEST_DELAY_MS) || 0;
@@ -26,13 +27,28 @@ function loadStampFiles(stampsDir: string): StampFile[] {
   }
 
   const stampFiles: StampFile[] = [];
+  let hasErrors = false;
+
   for (const file of jsonFiles) {
     const filePath = path.join(stampsDir, file);
     try {
-      stampFiles.push(JSON.parse(fs.readFileSync(filePath, 'utf8')));
+      const raw = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+      const result = validateStampFile(raw);
+      if (!result.valid) {
+        logValidationErrors(file, result.errors);
+        hasErrors = true;
+        continue;
+      }
+      stampFiles.push(result.data);
     } catch (error) {
       console.error(`Failed to parse ${file}:`, error);
+      hasErrors = true;
     }
+  }
+
+  if (hasErrors) {
+    console.error('\nFix the above errors before running the monitor.');
+    process.exit(1);
   }
 
   return stampFiles;
